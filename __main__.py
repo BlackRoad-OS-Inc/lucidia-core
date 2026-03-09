@@ -1,4 +1,9 @@
-"""Lucidia's interactive console with BlackRoad OS coordination helpers."""
+"""Lucidia's interactive console with Codex coordination helpers.
+
+Provides a tiny REPL so users can run Python snippets. On startup,
+Lucidia introduces herself with a short message about her origins and
+abilities. Prefix commands with ':' to control the console.
+"""
 from __future__ import annotations
 
 import io
@@ -6,7 +11,7 @@ import json
 from contextlib import redirect_stdout
 from typing import Iterable
 
-from .harmony import HarmonyCoordinator
+from harmony import HarmonyCoordinator
 
 PROMPT = "lucidia> "
 CAPABILITIES = ["repl", "hologram-console", "lucidia-link"]
@@ -103,8 +108,7 @@ def main() -> None:
         stripped = code.strip()
         if not stripped:
             continue
-        lowered = stripped.lower()
-        if lowered in {"exit", "quit"}:
+        if stripped.lower() in {"exit", "quit"}:
             break
         if stripped.startswith(":"):
             if not _handle_command(stripped, coordinator):
@@ -114,12 +118,13 @@ def main() -> None:
         stdout = io.StringIO()
         try:
             with redirect_stdout(stdout):
-                exec(code, {"__builtins__": {"print": print}}, local_vars)
+                exec(stripped, {"__builtins__": {"print": print}}, local_vars)  # noqa: S102
             output = stdout.getvalue().strip()
             if output:
                 print(output)
-        except Exception as exc:  # noqa: BLE001 - broad for user feedback
+        except Exception as exc:  # noqa: BLE001
             print(f"Error: {exc}")
+
     coordinator.update_local_status(
         role="hologram-console",
         status="offline",
@@ -131,3 +136,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
