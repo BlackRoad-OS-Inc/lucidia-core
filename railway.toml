@@ -2,7 +2,7 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "python app.py"
+startCommand = "npm start"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
@@ -13,6 +13,6 @@ name = "lucidia-core"
 
 [services.env]
 PORT = "8080"
-PYTHON_ENV = "production"
+NODE_ENV = "production"
 REPO_NAME = "lucidia-core"
 ORG_NAME = "BlackRoad-OS"

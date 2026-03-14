@@ -1,8 +1,8 @@
-# === LUCIDIA COMPLIANCE + OPERATIONAL SYSTEMS BLACKROAD OS ===
+# === LUCIDIA COMPLIANCE + OPERATIONAL SYSTEMS CODEX ===
 # Phase II of the BlackRoad Formation Series
 # Author: Alexa Louise Amundson | Lakeville, MN | November 2025
 
-blackroad os:
+codex:
   title: "Lucidia-Operationalization"
   description: "Deploy Lucidia Technologies Inc. as active RIA/BD hybrid under BlackRoad Inc."
   priority: "Compliance First"
@@ -91,7 +91,7 @@ agents:
       - "Aligns AI-generated recommendations with fiduciary standards"
       - "Maintains RIA record retention logs"
   - id: "LUC-OPS-003"
-    name: "BlackRoad OS"
+    name: "Cadillac"
     function: "System integration and voice-to-agent orchestration"
     scope:
       - "Routes compliance prompts"
@@ -150,7 +150,7 @@ task_queue:
     status: "Pending"
   - id: 003
     name: "MN Producer Reinstatement (NIPR)"
-    agent: "BlackRoad OS"
+    agent: "Cadillac"
     status: "In Progress"
   - id: 004
     name: "BOI Filing (Lucidia)"
@@ -170,4 +170,4 @@ success_metrics:
   - "All BOI filings confirmed via FinCEN receipt"
   - "BlackRoad → Lucidia corporate link confirmed in tax and compliance files"
 
-# === END OF BLACKROAD OS ===
+# === END OF CODEX ===

@@ -6,7 +6,7 @@ import re
 import time
 from typing import Any
 
-from .core import BUS, start
+from lucidia.reflex.core import BUS, start
 
 ERROR_RE = re.compile(r"\bERROR\b")
 

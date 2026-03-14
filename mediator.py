@@ -1,8 +1,8 @@
-"""Lucidia BlackRoad OS-10 Mediator agent.
+"""Lucidia Codex-10 Mediator agent.
 
 The Mediator keeps conversations from collapsing into collisions.  It listens
 for tension signals inside the Reflex bus, gathers the motives on each side,
-and offers balancing language aligned with the BlackRoad OS-10 charter.  Output is
+and offers balancing language aligned with the Codex-10 charter.  Output is
 persisted as transcripts, harmony metrics, and prompt snippets that other
 agents can learn from.
 
@@ -25,10 +25,8 @@ from typing import Mapping, Optional, Sequence
 
 import yaml
 
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from intelligence.events import make_event, validate_event
-from reflex import BUS, start as start_reflex
+from lucidia.intelligence.events import make_event, validate_event
+from lucidia.reflex import BUS, start as start_reflex
 
 LOGGER = logging.getLogger("lucidia.mediator")
 if not LOGGER.handlers:
@@ -39,14 +37,14 @@ if not LOGGER.handlers:
     LOGGER.addHandler(handler)
 
 DEFAULT_STATE_DIR = Path("logs/lucidia/mediator")
-DEFAULT_EMIT_DIR = Path("/blackroad os/prompts/next")
+DEFAULT_EMIT_DIR = Path("/codex/prompts/next")
 
 
 @dataclass(slots=True)
 class MediatorCharter:
-    """Minimal slice of the BlackRoad OS-10 charter useful at runtime."""
+    """Minimal slice of the Codex-10 charter useful at runtime."""
 
-    name: str = "BlackRoad OS-10 Mediator"
+    name: str = "Codex-10 Mediator"
     moral_constant: str = "Justice = Understanding in motion"
     core_principle: str = "No truth is served by silencing another"
     directives: Sequence[str] = field(default_factory=tuple)
@@ -168,7 +166,7 @@ class PromptEmitter:
 
 
 class Mediator:
-    """BlackRoad OS-10 Mediator implementation."""
+    """Codex-10 Mediator implementation."""
 
     def __init__(
         self,
@@ -295,7 +293,7 @@ class Mediator:
         self.metrics.record(follow_up=follow_up, summary=guidance)
         self._save_metrics()
         resolution = make_event(
-            topic="blackroad os.mediator.resolution",
+            topic="codex.mediator.resolution",
             payload={
                 "conflict_id": record.conflict_id,
                 "source_topic": record.source_topic,
@@ -425,12 +423,12 @@ class Mediator:
 
 
 def _parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the BlackRoad OS-10 Mediator agent")
+    parser = argparse.ArgumentParser(description="Run the Codex-10 Mediator agent")
     parser.add_argument(
         "--seed",
         type=Path,
         default=None,
-        help="Path to the BlackRoad OS charter YAML (e.g. blackroad os10.yaml)",
+        help="Path to the Codex charter YAML (e.g. codex10.yaml)",
     )
     parser.add_argument(
         "--emit",
